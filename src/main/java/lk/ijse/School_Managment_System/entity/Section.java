@@ -16,6 +16,6 @@ public class Section {
     private long sectionId;
     private String description;
 
-    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "section", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Student> studentList;
 }

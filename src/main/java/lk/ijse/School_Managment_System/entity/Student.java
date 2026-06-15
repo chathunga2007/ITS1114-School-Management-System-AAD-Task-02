@@ -21,6 +21,6 @@ public class Student {
     @ManyToOne
     private Section section;
 
-    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Record> recordList;
 }
