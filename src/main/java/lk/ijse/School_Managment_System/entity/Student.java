@@ -1,6 +1,7 @@
 package lk.ijse.School_Managment_System.entity;
 
 import jakarta.persistence.*;
+import lk.ijse.School_Managment_System.enumeration.StudentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,8 @@ public class Student {
     private long studentId;
     private String studentName;
     private LocalDate dob;
+    @Enumerated(EnumType.STRING)
+    private StudentStatus studentStatus;
 
     @ManyToOne
     private Section section;
