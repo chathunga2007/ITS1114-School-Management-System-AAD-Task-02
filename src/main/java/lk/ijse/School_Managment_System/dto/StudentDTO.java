@@ -17,9 +17,11 @@ public class StudentDTO {
     private LocalDate dob;
     @Enumerated(EnumType.STRING)
     private StudentStatus studentStatus;
+    private long sectionId;
 
-    public StudentDTO(String studentName, LocalDate dob) {
+    public StudentDTO(String studentName, LocalDate dob, long sectionId) {
         this.studentName = studentName;
         this.dob = dob;
+        this.sectionId = sectionId;
     }
 }
