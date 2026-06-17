@@ -39,8 +39,9 @@ public class BookServiceImpl implements BookService {
         try{
 
             Optional<Book> optionalBook = bookRepository.findById(bookDTO.getBookId());
-            if(!optionalBook.isPresent())
-                log.error("Book not found with id {}", bookDTO.getBookId());
+            if(!optionalBook.isPresent()) {
+                throw new Exception("Book not found with id " + bookDTO.getBookId());
+            }
 
             Book book = optionalBook.get();
             book.setBookName(bookDTO.getBookName());
