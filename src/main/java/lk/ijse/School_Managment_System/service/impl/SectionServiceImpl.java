@@ -38,8 +38,9 @@ public class SectionServiceImpl implements SectionService {
         try {
 
             Optional<Section> optionalSection = sectionRepository.findById(sectionDTO.getSectionId());
-            if (optionalSection.isEmpty())
-                log.error("Section not found with id {}", sectionDTO.getSectionId());
+            if (optionalSection.isEmpty()) {
+                throw new Exception("Section not found with id " + sectionDTO.getSectionId());
+            }
 
             Section section = optionalSection.get();
 
