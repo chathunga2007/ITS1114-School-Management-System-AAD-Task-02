@@ -34,10 +34,11 @@ public class StudentServiceImpl implements StudentService {
 
             Optional<Section> optionalSection = sectionRepository.findById(studentDTO.getSectionId());
 
-            if(!optionalSection.isPresent())
-                log.error("Section not found with id {}", studentDTO.getSectionId());
+            if(!optionalSection.isPresent()) {
+                throw new Exception("Section not found with id " + studentDTO.getSectionId());
+            }
 
-            sectionRepository.save(optionalSection.get());
+            student.setSection(optionalSection.get());
             studentRepository.save(student);
 
         } catch (Exception e) {
@@ -51,8 +52,9 @@ public class StudentServiceImpl implements StudentService {
         try {
 
             Optional<Student> optionalStudent = studentRepository.findById(studentDTO.getStudentId());
-            if(optionalStudent.isPresent())
-                log.info("Student found with id {}", studentDTO.getStudentId());
+            if(!optionalStudent.isPresent()) {
+                throw new Exception("Student not found with id " + studentDTO.getStudentId());
+            }
 
             Student student = optionalStudent.get();
 
@@ -66,6 +68,7 @@ public class StudentServiceImpl implements StudentService {
 
             Section section = optionalSection.get();
 
+            student.setSection(section);
             sectionRepository.save(section);
             studentRepository.save(student);
 
@@ -80,8 +83,9 @@ public class StudentServiceImpl implements StudentService {
         try {
 
             Optional<Student> optionalStudent = studentRepository.findById(studentId);
-            if(optionalStudent.isPresent())
-                log.info("Student found with id {}", studentId);
+            if(!optionalStudent.isPresent()) {
+                throw new Exception("Student not found with id " + studentId);
+            }
 
             Student student = optionalStudent.get();
 
