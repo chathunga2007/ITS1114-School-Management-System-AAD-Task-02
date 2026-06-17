@@ -11,9 +11,4 @@ public class BookDTO {
     private long bookId;
     private String bookName;
     private String bookAuthor;
-
-    public BookDTO(String bookName, String bookAuthor) {
-        this.bookName = bookName;
-        this.bookAuthor = bookAuthor;
-    }
 }
