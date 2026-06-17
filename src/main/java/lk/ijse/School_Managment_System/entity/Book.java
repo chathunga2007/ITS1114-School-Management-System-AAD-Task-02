@@ -17,6 +17,6 @@ public class Book {
     private String bookName;
     private String bookAuthor;
 
-    @OneToMany
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Record> recordList;
 }
