@@ -4,12 +4,16 @@ import lk.ijse.School_Managment_System.dto.RecordDTO;
 import lk.ijse.School_Managment_System.entity.Book;
 import lk.ijse.School_Managment_System.entity.Record;
 import lk.ijse.School_Managment_System.entity.Student;
+import lk.ijse.School_Managment_System.enumeration.BookStatus;
 import lk.ijse.School_Managment_System.repository.BookRepository;
 import lk.ijse.School_Managment_System.repository.RecordRepository;
 import lk.ijse.School_Managment_System.repository.StudentRepository;
 import lk.ijse.School_Managment_System.service.RecordService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -26,6 +30,7 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
+    @Transactional
     public void saveRecord(RecordDTO recordDTO) {
         log.info("saveRecord");
         try {
@@ -43,8 +48,13 @@ public class RecordServiceImpl implements RecordService {
 
             record.setStudent(optionalStudent.get());
             record.setBook(optionalBook.get());
+            record.setBorrowDate(recordDTO.getBorrowDate());
 
             recordRepository.save(record);
+
+            Book book = optionalBook.get();
+            book.setBookStatus(BookStatus.NOT_AVAILABLE);
+            bookRepository.save(book);
 
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -74,6 +84,7 @@ public class RecordServiceImpl implements RecordService {
 
             record.setStudent(optionalStudent.get());
             record.setBook(optionalBook.get());
+            record.setBorrowDate(LocalDate.now());
 
             recordRepository.save(record);
 
