@@ -1,9 +1,12 @@
 package lk.ijse.School_Managment_System.entity;
 
 import jakarta.persistence.*;
+import lk.ijse.School_Managment_System.enumeration.BookStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -16,6 +19,9 @@ public class Book {
     private long bookId;
     private String bookName;
     private String bookAuthor;
+    private LocalDate dob;
+    @Enumerated(EnumType.STRING)
+    private BookStatus bookStatus;
 
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Record> recordList;
