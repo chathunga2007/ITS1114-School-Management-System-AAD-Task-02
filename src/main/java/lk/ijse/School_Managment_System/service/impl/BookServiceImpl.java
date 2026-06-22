@@ -2,6 +2,7 @@ package lk.ijse.School_Managment_System.service.impl;
 
 import lk.ijse.School_Managment_System.dto.BookDTO;
 import lk.ijse.School_Managment_System.entity.Book;
+import lk.ijse.School_Managment_System.enumeration.BookStatus;
 import lk.ijse.School_Managment_System.repository.BookRepository;
 import lk.ijse.School_Managment_System.service.BookService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,7 @@ public class BookServiceImpl implements BookService {
             Book book = new Book();
             book.setBookName(bookDTO.getBookName());
             book.setBookAuthor(bookDTO.getBookAuthor());
+            book.setBookStatus(BookStatus.AVAILABLE);
 
             bookRepository.save(book);
 
